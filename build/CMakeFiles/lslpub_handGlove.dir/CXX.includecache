@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/src/main.cpp
+fcntl.h
+-
+unistd.h
+-
+iostream
+-
+vector
+-
+termios.h
+-
+

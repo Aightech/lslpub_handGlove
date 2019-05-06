@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/lslpub_handGlove.dir/src/main.cpp.o  -o lslpub_handGlove  -L/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/lib -Wl,-rpath,/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/lib -llsl64 
