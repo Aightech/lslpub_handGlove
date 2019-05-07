@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+../include/lsl_c.h
+stdint.h
+-
+
+../include/lsl_cpp.h
+string
+-
+vector
+-
+stdexcept
+-
+lsl_c.h
+../include/lsl_c.h
+
 /home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/src/main.cpp
 fcntl.h
 -
@@ -14,6 +28,8 @@ unistd.h
 iostream
 -
 vector
+-
+lsl_cpp.h
 -
 termios.h
 -
