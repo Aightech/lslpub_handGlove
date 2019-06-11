@@ -1,3 +1,0 @@
-/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/build/CMakeFiles/rebuild_cache.dir
-/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/build/CMakeFiles/lslpub_handGlove.dir
-/home/aightech/Documents/epfl/tne_project/inputs_labels/lslpub_handGlove/build/CMakeFiles/edit_cache.dir

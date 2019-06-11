@@ -1,0 +1,29 @@
+* Build LSL library on windows
+You can also follow this guide https://github.com/sccn/labstreaminglayer/blob/master/doc/BUILD.md.
+** Requirements
+- [[https://cmake.org/download/][Cmake]] Download and install cmake.
+- [[https://www.qt.io/download][Qt]] Download qt installer (open source version).
+- [[https://sourceforge.net/projects/boost/files/boost-binaries/][Boost libraries]] Download boost lib (last binaries version).
+- [[https://git-for-windows.github.io/][Git]] Download and install git.
+- [[https://sourceforge.net/projects/mingw-w64/][MinGW32]] (download and execute the installer for windows, chose i686_64 architecture, add the the bin folder address of minGW to the PATH environement variable) 
+
+** Steps 
+- Clone the repository and go inside.
+#+BEGIN_SRC shell
+git clone --recurse-submodules https://github.com/labstreaminglayer/labstreaminglayer.git &&cd labstreaminglayer
+#+END_SRC
+- Create a build repository and go inside.
+#+BEGIN_SRC shell
+mkdir build && cd build
+#+END_SRC
+Configure and generate the project with the GUI.
+#+BEGIN_SRC shell
+cmake-gui
+#+END_SRC
+Click on "configure". Select the MinGW MakeFile.
+Check if the boost libraries and Qt are correct.
+Then click on "generate".
+In the command prompt, build the project.
+#+BEGIN_SRC shell
+cmake --build . --config Release --target install
+#+END_SRC

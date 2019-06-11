@@ -31,7 +31,7 @@
 #define Din_PIN  12 //MISO 
 #define Dclk_PIN 13 //Clock 
 
-int readvalue; 
+int readvalue[23]; 
 
 int read_adc(int channel, int CSpin)
 {
@@ -119,26 +119,25 @@ void loop()
     case '9':
     {
       int i = c - '0';
-      readvalue = read_adc(i%8, CS0_PIN + i/8); 
-      Serial.write((char*)&readvalue,2);
+      readvalue[0] = read_adc(i%8, CS0_PIN + i/8); 
+      Serial.write((char*)readvalue,2);
     }
     break;
     case 'a':
     {
       for(int i = 0 ; i<10 ; i++)
-      {
-        readvalue = read_adc(i%8, CS0_PIN + i/8); 
-        Serial.write((char*)&readvalue, 2); 
-      }
+        readvalue[i] = read_adc(i%8, CS0_PIN + i/8); 
+      Serial.write((char*)readvalue, 2*10); 
     }
+    break;
     case 'b':
     {
       for(int i = 0 ; i<24 ; i++)
-      {
-        readvalue = read_adc(i%8, CS0_PIN + i/8); 
-        Serial.write((char*)&readvalue, 2); 
-      }
+        readvalue[i] = read_adc(i%8, CS0_PIN + i/8); 
+      Serial.write((char*)readvalue, 2*23); 
+      
     }
+    break;
     
     default:
     //nothing
