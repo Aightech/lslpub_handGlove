@@ -22,7 +22,7 @@
   */
 
 
-
+#define Sig_PIN 7  //Signal pin 
 #define CS0_PIN 8  //Select Pin 
 #define CS1_PIN 9  //Select Pin 
 #define CS2_PIN 10 //Select Pin 
@@ -31,7 +31,11 @@
 #define Din_PIN  12 //MISO 
 #define Dclk_PIN 13 //Clock 
 
-int readvalue[23]; 
+unsigned long t;
+unsigned long dt=500;
+
+int readvalue[23];
+bool signal=false; 
 
 int read_adc(int channel, int CSpin)
 {
@@ -81,7 +85,8 @@ void setup()
     pinMode(CS2_PIN, OUTPUT);  
     pinMode(Dout_PIN, OUTPUT); 
     pinMode(Din_PIN , INPUT); 
-    pinMode(Dclk_PIN, OUTPUT); 
+    pinMode(Dclk_PIN, OUTPUT);
+    pinMode(Sig_PIN, OUTPUT); 
     
     //disable device to start with 
     digitalWrite(CS0_PIN,HIGH);
@@ -90,6 +95,7 @@ void setup()
     digitalWrite(Dout_PIN,LOW); 
     digitalWrite(Dclk_PIN,LOW); 
     
+    t = millis();
     Serial.begin(9600); 
 } 
 
@@ -127,14 +133,18 @@ void loop()
     {
       for(int i = 0 ; i<10 ; i++)
         readvalue[i] = read_adc(i%8, CS0_PIN + i/8); 
-      Serial.write((char*)readvalue, 2*10); 
+      readvalue[10]=(int)signal;
+      Serial.write((char*)readvalue, 2*11); 
+       
+      //Serial.println("\n"+String(readvalue[10]));
     }
     break;
     case 'b':
     {
       for(int i = 0 ; i<24 ; i++)
         readvalue[i] = read_adc(i%8, CS0_PIN + i/8); 
-      Serial.write((char*)readvalue, 2*23); 
+      
+      Serial.write((char*)readvalue, 2*23);
       
     }
     break;
@@ -145,5 +155,13 @@ void loop()
     
    
   }
+  if(millis()-t>dt)
+  {
+    t =millis();
+    signal=!signal;
+    digitalWrite(Sig_PIN, signal);
+  }
+  
+  
   delay(10); 
 } 

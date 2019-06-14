@@ -7,6 +7,7 @@
 #include <iostream>
 #include <tools.h>
 #include <lsl_cpp.h>
+#include <iomanip>      // std::setprecision
 
 
 #define HEADER '$'
@@ -78,6 +79,12 @@ void get_cal(std::string file, float param[])
       int a;
       for(int i =0; i< 2*15 ; i++)
 	in >> param[i];
+    }
+  else
+    {
+      std::cout << "could not open the calibration file." << std::endl;
+      for(int i =0; i< 2*15 ; i++)
+	param[i]=(i+1)%2;
     }
 }
 
@@ -162,9 +169,11 @@ int main(int argc, char *argv[])
   DWORD bytesRead;	  
   DWORD bytesSend;
   char c = 'a';
-  int16_t buffer[10];  
+
+  int nb_in=11;
+  int16_t buffer[nb_in];  
   
-  int nb_ch = 15;
+  int nb_ch = 16;
   std::vector<float> sample(nb_ch);
   try
     {
@@ -176,17 +185,18 @@ int main(int argc, char *argv[])
 	  
 	  WriteFile(arduino.handler, (void*) &c, 1, &bytesSend, 0);
 	  ClearCommError(arduino.handler, &(arduino.errors), &(arduino.status));
-	  ReadFile(arduino.handler, (char*)buffer, 2*10, &bytesRead, NULL);
+	  ReadFile(arduino.handler, (char*)buffer, 2*nb_in, &bytesRead, NULL);
 
 	  
-	  for(int i =0; i<15;i++)
+	  sample[nb_ch-1]=buffer[nb_in-1];
+	  for(int i =0; i<nb_ch-1;i++)
 	    {
 	      sample[i] = (buffer[2*(i/3) + ((i%3==0)?1:0)])*param[2*i] + param[2*i+1];
-	      std::cout << sample[i] << " ";
+	      std::cout << std::fixed << std::setprecision(3)  << sample[i] << " ";
 	    }
-	  std::cout << "\xd" << std::flush;
+	  
+	  std::cout << sample[nb_ch-1] << "\xd" << std::flush;
 	    
-
 	  outlet.push_sample(sample);
 	  Sleep(10);
 	}
