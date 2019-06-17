@@ -16,3 +16,6 @@
 !/arduino/*
 !README.org
 !BUILD_LSL.org
+
+!/config
+!/config/*

@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 				      "Calibration Mode: 0:No / 1:Yes"});
   std::vector<std::string> opt_value(
 				     {"handGlove",
-				      "conf.cfg",
+				      "config/conf.cfg",
 				      "0"});
   
   get_arg(argc, argv, opt_flag, opt_label, opt_value);
