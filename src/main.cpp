@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 				      "Calibration Mode: 0:No / 1:Yes"});
   std::vector<std::string> opt_value(
 				     {"handGlove",
-				      "none",
+				      "conf.cfg",
 				      "0"});
   
   get_arg(argc, argv, opt_flag, opt_label, opt_value);
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 
   if(calibration_mode==1)
     calibration(&arduino, calibration_file, param);
-  else if(calibration_file.compare("none"))
+  else
       get_cal(calibration_file, param);
   
   DWORD bytesRead;	  
