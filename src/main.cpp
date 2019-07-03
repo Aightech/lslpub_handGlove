@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 	  std::cout << sample[nb_ch-1] << "\xd" << std::flush;
 	    
 	  outlet.push_sample(sample);
-	  Sleep(10);
+	  Sleep(1);
 	}
      
 	

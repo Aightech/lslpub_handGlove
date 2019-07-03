@@ -32,7 +32,7 @@
 #define Dclk_PIN 13 //Clock 
 
 unsigned long t;
-unsigned long dt=500;
+unsigned long dt=101;
 
 int readvalue[23];
 bool signal=false; 
@@ -157,11 +157,13 @@ void loop()
   }
   if(millis()-t>dt)
   {
+    dt += 100;
+    dt %= 1000;
     t =millis();
     signal=!signal;
     digitalWrite(Sig_PIN, signal);
   }
   
   
-  delay(10); 
+  delay(1); 
 } 
